@@ -9,6 +9,7 @@ import Saidbar from "./components/Saidbar/Saidbar";
 import Products from "./pages/Products/Products";
 import AddCart from "./pages/Addproduct/AddCart";
 import Details from "./pages/Details/Details";
+import Edit from "./pages/Edit/Edit";
 
 export const UserContext = createContext();
 export const ChanelContext = createContext();
@@ -33,6 +34,7 @@ function App() {
               <Route path="/products" element={<Products />} />
               <Route path="/AddCart" element={<AddCart />} />
               <Route path="/Details/:id" element={<Details />}></Route>
+              <Route path="/edit/:id" element={<Edit />}></Route>
             </Routes>
 
             <Saidbar />

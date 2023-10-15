@@ -103,7 +103,9 @@ const Posts = () => {
                   <td>{ph.price}</td>
                   <td>{ph.priceSale}</td>
                   <td className="crud-img">
-                    <img src="Редактировать.svg" alt="Eror" />
+                    <Link to={`/edit/${ph.id}`}>
+                      <img src="Редактировать.svg" alt="Eror" />
+                    </Link>
                   </td>
                   <td className="crud-img">
                     <img
