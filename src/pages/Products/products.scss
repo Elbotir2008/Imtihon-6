@@ -1,0 +1,24 @@
+.products-section {
+  width: 100%;
+  padding-top: 100px;
+  text-align: center;
+  h1 {
+    font-size: 25px;
+    font-family: sans-serif;
+  }
+  button {
+    margin-left: 10px;
+    margin-top: 30px;
+  }
+  img {
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  .crud-img {
+    cursor: pointer;
+  }
+  .linkDetails {
+    text-decoration: none;
+    color: #000;
+  }
+}

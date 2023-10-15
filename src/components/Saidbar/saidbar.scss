@@ -1,0 +1,35 @@
+aside {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10%;
+  height: 100vh;
+  background-color: #5b5ce2;
+  img {
+    position: absolute;
+    cursor: pointer;
+    &:nth-child(1) {
+      left: 17%;
+      top: 10%;
+    }
+    &:nth-child(2) {
+      left: 32%;
+      top: 25%;
+    }
+  }
+  .linkImg1 {
+    position: absolute;
+    left: 32%;
+    top: 37%;
+  }
+  .linkImg2 {
+    position: absolute;
+    left: 32%;
+    top: 47%;
+  }
+  .AddCart {
+    position: absolute;
+    left: 5%;
+    top: 60%;
+  }
+}

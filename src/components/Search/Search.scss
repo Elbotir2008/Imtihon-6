@@ -1,0 +1,19 @@
+.search {
+  form {
+    .input1 {
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 30%;
+      width: 40%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .input2 {
+      display: none;
+    }
+  }
+}

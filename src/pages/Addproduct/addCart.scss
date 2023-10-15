@@ -1,0 +1,26 @@
+.addCart-section {
+  position: relative;
+  z-index: 1;
+  .container-ad {
+    padding: 133px 60px 0px 160px;
+    height: 100vh;
+    .add-content {
+      background-color: white;
+      padding: 9px 12px;
+      border-radius: 12px;
+      .p1 {
+        display: block;
+        padding: 14px 16px;
+        width: 106px;
+        border-radius: 5px;
+        background: #f0f0f6;
+        color: #212121;
+        font-family: sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 72%;
+      }
+    }
+  }
+}
