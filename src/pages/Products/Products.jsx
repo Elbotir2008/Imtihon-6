@@ -59,6 +59,21 @@ const Posts = () => {
     }, 1050);
   }
 
+  const [input, setInput] = useState("");
+  const searchText = (e) => {
+    const inputText = e.target.value.toLowerCase();
+    setInput(inputText);
+    // console.log(input);
+  };
+
+  const filtered = posts.filter((el) => {
+    if (input === "") {
+      return el;
+    } else {
+      return el.name.toLowerCase().includes(input);
+    }
+  });
+
   return (
     <section className="products-section">
       <div className="container">
@@ -80,17 +95,35 @@ const Posts = () => {
                 <th>Цена</th>
                 <th>Скидкой</th>
                 <th>
-                  <input
-                    id="input"
-                    name="input"
-                    type="text"
-                    placeholder="Search..."
-                    className="form-control"
-                  />
+                  <Search searchText={searchText} />
                 </th>
               </tr>
             </thead>
             <tbody>
+              {filtered.map((fl) => (
+                <tr key={fl.id} className="mb-3">
+                  <td className="item">
+                    <Link to={`/Details/${fl.id}`} className="linkDetails">
+                      {fl.name}
+                    </Link>
+                  </td>
+                  <td>{fl.brand}</td>
+                  <td>{fl.price}</td>
+                  <td>{fl.priceSale}</td>
+                  <td className="crud-img">
+                    <Link to={`/edit/${fl.id}`}>
+                      <img src="Редактировать.svg" alt="Eror" />
+                    </Link>
+                  </td>
+                  <td className="crud-img">
+                    <img
+                      src="Корзина.svg"
+                      alt="Eror"
+                      onClick={() => deletePr(fl.id)}
+                    />
+                  </td>
+                </tr>
+              ))}
               {posts.map((ph) => (
                 <tr key={ph.id} className="mb-3">
                   <td className="item">
