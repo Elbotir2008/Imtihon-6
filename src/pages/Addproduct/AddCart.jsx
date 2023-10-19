@@ -3,8 +3,29 @@ import "./addCart.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+
+const initialValues = {
+  name: "",
+  // brand: "",
+  // price: "",
+  // priceSale: "",
+};
+
+const onSubmit = (values) => {
+  console.log("Form values", values);
+};
+
+const validationSchema = Yup.object({
+  name: Yup.string().required("name is required!"),
+  // brand: Yup.string().required("brand is required!"),
+  // price: Yup.string().required("price is required!"),
+  // priceSale: Yup.string().required("priceSale is required!"),
+});
 
 const AddCart = () => {
+  const [image, setImage] = useState("");
   const [values, setValues] = useState({
     name: "",
     brand: "",
@@ -13,7 +34,21 @@ const AddCart = () => {
     price: "",
     priceSale: "",
   });
+  function handleImage(e) {
+    console.log(e.target.files);
+    setImage(e.target.files[0]);
+  }
   const handleSubmit = async (event) => {
+    const formData = new FormData();
+    formData.append("image", image);
+    axios
+      .post(
+        "https://64dcf61be64a8525a0f76c4d.mockapi.io/api/v1/products",
+        formData
+      )
+      .then((res) => {
+        console.log(res);
+      });
     event.preventDefault();
     toHome("/products");
     try {
@@ -27,6 +62,15 @@ const AddCart = () => {
     }
   };
   const toHome = useNavigate();
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
+
+  const { errors, handleChange, handleBlur, touched } = formik;
+
   return (
     <section className="addCart-section">
       <div className="container-ad">
@@ -42,11 +86,16 @@ const AddCart = () => {
                     name="name"
                     aria-label="Large"
                     aria-describedby="inputGroup-sizing-sm"
-                    required
                     onChange={(e) =>
                       setValues({ ...values, name: e.target.value })
                     }
+                    // onChange={handleChange}
+                    // value={values.name}
+                    // onBlur={handleBlur}
                   />
+                  {touched.name && errors.name ? (
+                    <div className="error">{errors.name}</div>
+                  ) : null}
                 </InputGroup>
                 <InputGroup size="lg" className="d-flex input-group">
                   <InputGroup.Text id="inputGroup-sizing-lg">
@@ -57,10 +106,10 @@ const AddCart = () => {
                     aria-describedby="inputGroup-sizing-sm"
                     className="brend-input-group"
                     name="brand"
-                    required
                     onChange={(e) =>
                       setValues({ ...values, brand: e.target.value })
                     }
+                    onBlur={handleBlur}
                   />
                 </InputGroup>
 
@@ -77,6 +126,7 @@ const AddCart = () => {
                     onChange={(e) =>
                       setValues({ ...values, price: e.target.value })
                     }
+                    onBlur={handleBlur}
                   />
                   <InputGroup.Text id="inputGroup-sizing-lg">
                     Цена со скидкой
@@ -88,7 +138,17 @@ const AddCart = () => {
                     onChange={(e) =>
                       setValues({ ...values, priceSale: e.target.value })
                     }
+                    onBlur={handleBlur}
                   />
+                  <div>
+                    <Form.Control
+                      type="file"
+                      aria-label="Large"
+                      aria-describedby="inputGroup-sizing-sm"
+                      name="file"
+                      onChange={handleImage}
+                    />
+                  </div>
                 </InputGroup>
                 <button className="Save-btn btn btn-success">Save</button>
               </Form>

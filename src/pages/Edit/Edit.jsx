@@ -5,6 +5,8 @@ import axios from "axios";
 
 const Edit = () => {
   // const [data, setData] = useState([]);
+  const [image, setImage] = useState("");
+
   const { id } = useParams();
   const [values, setValues] = useState({
     name: "",
@@ -26,7 +28,22 @@ const Edit = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  function handleImage(e) {
+    console.log(e.target.files);
+    setImage(e.target.files[0]);
+  }
+
   const handleEdit = async (event) => {
+    const formData = new FormData();
+    formData.append("image", image);
+    axios
+      .post(
+        "https://64dcf61be64a8525a0f76c4d.mockapi.io/api/v1/products",
+        formData
+      )
+      .then((res) => {
+        console.log(res);
+      });
     event.preventDefault();
     try {
       const res = await axios.put(
@@ -131,6 +148,12 @@ const Edit = () => {
                     onChange={(e) =>
                       setValues({ ...values, priceSale: e.target.value })
                     }
+                  />
+                  <input
+                    className="form-control"
+                    type="file"
+                    name="file"
+                    onChange={handleImage}
                   />
                 </div>
               </div>
